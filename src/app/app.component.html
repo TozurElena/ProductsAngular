@@ -1,9 +1,11 @@
 
 <div class="max-w-2xl container mx-auto pt-5">
-    <h1 class="text-3xl font-bold text-center">{{ title | titlecase }}</h1>
+    <h1 class="text-3xl font-bold text-center mb-5">{{ title | titlecase }}</h1>
+
+    <p *ngIf="loading" class="text-center text-lg ">Loading...</p>
 
     <app-product
-           *ngFor="let product of products" [product]="product"
+           *ngFor="let product of products$ | async" [product]="product"
     ></app-product>
 </div>
 
