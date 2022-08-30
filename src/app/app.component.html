@@ -3,10 +3,20 @@
 <div class="max-w-2xl container mx-auto pt-5">
     <h1 class="text-3xl font-bold text-center mb-5">{{ title | titlecase }}</h1>
 
+    <input type="text"
+           class="mb-2 px-4 border py-2 w-full"
+           placeholder="Filter products..."
+           [(ngModel)]="term"
+    >
+
+
     <p *ngIf="loading" class="text-center text-lg ">Loading...</p>
 
-    <app-product
-           *ngFor="let product of products$ | async" [product]="product"
-    ></app-product>
+    <div *ngIf="products$ | async as products">
+        <app-product
+                *ngFor="let product of products | filterProducts: term" [product]="product"
+        ></app-product>
+    </div>
+
 </div>
 
